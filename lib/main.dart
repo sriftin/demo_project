@@ -12,13 +12,6 @@ void main() async{
   await Firebase.initializeApp();
   runApp(MaterialApp(
     home: Loading(),
-      // initialRoute: '/',
-    // routes:{
-    //   '/' : (context) => Loading(),
-    //   '/home' : (context) =>  Home(),
-    //   'phoneNum' : (context) => PhoneNum(),
-    //   // 'register' : (context) => Register(),
-    // },
   ));
 }
 

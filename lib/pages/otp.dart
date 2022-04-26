@@ -219,6 +219,7 @@ class _OTPScreenState extends State<OTPScreen> {
           TextButton(
             onPressed: () {
               setState(() {
+                _pinOTPCodeController.clear();
                 wrongCode = false;
                 changeText();
               });
