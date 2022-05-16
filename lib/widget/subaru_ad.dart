@@ -5,7 +5,7 @@ bool buttonVisible = false;
 
 class SubaruAd extends StatefulWidget {
   const SubaruAd({
-    Key? key,
+    Key key,
   }) : super(key: key);
 
   @override

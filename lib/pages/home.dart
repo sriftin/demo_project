@@ -5,7 +5,7 @@ import 'package:demo_project/widget/subaru_ad.dart';
 import 'package:demo_project/widget/appbar.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({Key key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();

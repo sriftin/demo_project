@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 
 class UserScreen extends StatefulWidget {
   String phone;
-  UserScreen({Key? key, required this.phone}) : super(key: key);
+  UserScreen({Key key, this.phone}) : super(key: key);
 
   @override
   State<UserScreen> createState() => _UserScreenState();
@@ -16,7 +16,7 @@ class _UserScreenState extends State<UserScreen> {
   bool value = false;
   bool value1 = false;
   bool value2 = false;
-  String? userFullName;
+  String userFullName;
   static const contact = MethodChannel("user/user");
   TextEditingController _firstName = TextEditingController();
   TextEditingController _lastName = TextEditingController();
@@ -206,7 +206,7 @@ class _UserScreenState extends State<UserScreen> {
                   ),
                   Checkbox(value: value, onChanged: (value) {
                     setState(() {
-                      this.value = value!;
+                      this.value = value;
                     });
                   } ),
                 ],
@@ -229,7 +229,7 @@ class _UserScreenState extends State<UserScreen> {
                   ),
                   Checkbox(value: value1, onChanged: (value) {
                     setState(() {
-                      this.value1 = value!;
+                      this.value1 = value;
                     });
                   } ),
                 ],
@@ -252,7 +252,7 @@ class _UserScreenState extends State<UserScreen> {
                   ),
                   Checkbox(value: value2, onChanged: (value) {
                     setState(() {
-                      this.value2 = value!;
+                      this.value2 = value;
                     });
                   } ),
                 ],
@@ -301,7 +301,7 @@ class _UserScreenState extends State<UserScreen> {
       "eMail": _eMail.text,
       "id" : _id.text
     };
-    String? value;
+    String value;
     try{
       value = await contact.invokeMethod("contact",sendMap);
     } catch (e){

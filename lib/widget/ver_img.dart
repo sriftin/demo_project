@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class VerImg extends StatelessWidget {
   const VerImg({
-    Key? key,
+    Key key,
   }) : super(key: key);
 
   @override

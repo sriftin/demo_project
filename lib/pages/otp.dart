@@ -22,7 +22,7 @@ class _OTPScreenState extends State<OTPScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _pinOTPCodeController = TextEditingController();
   final FocusNode _pinOTPFocus = FocusNode();
-  String? verificationCode;
+  String verificationCode;
   bool done = false;
   bool wrongCode = false;
   static const phoneNumber = MethodChannel("phone/number");
@@ -43,7 +43,7 @@ class _OTPScreenState extends State<OTPScreen> {
   }
 
   changeText() {
-    codeSent: (String vID, int? respondToken) {
+    codeSent: (String vID, int respondToken) {
       setState(() {
         verificationCode = vID;
       });
@@ -92,7 +92,7 @@ class _OTPScreenState extends State<OTPScreen> {
           print(e.message);
           wrongCode == true;
         },
-        codeSent: (String vID, int? respondToken) {
+        codeSent: (String vID, int respondToken) {
           setState(() {
             verificationCode = vID;
           });
@@ -166,7 +166,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 try {
                   await FirebaseAuth.instance
                       .signInWithCredential(PhoneAuthProvider.credential(
-                      verificationId: verificationCode!, smsCode: pin))
+                      verificationId: verificationCode, smsCode: pin))
                       .then((value) {
                     if (value.user != null) {
                       // Navigator.of(context).push(
@@ -244,7 +244,7 @@ class _OTPScreenState extends State<OTPScreen> {
     var sendMap = <String, dynamic>{
       "phoneNumber": widget.phone.toString()
     };
-    String? value;
+    String value;
 
     try {
       value = await phoneNumber.invokeMethod("passNumber", sendMap);

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BGimg extends StatelessWidget {
-  const BGimg({
-    Key? key,
-  }) : super(key: key);
+  const BGimg({Key key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

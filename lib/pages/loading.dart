@@ -8,7 +8,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:demo_project/widget/bg_img.dart';
 
 class Loading extends StatefulWidget {
-  const Loading({Key? key}) : super(key: key);
+  const Loading({Key key}) : super(key: key);
 
   @override
   State<Loading> createState() => _LoadingState();

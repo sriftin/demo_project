@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ExistingUser extends StatefulWidget {
-  const ExistingUser({Key? key}) : super(key: key);
+  const ExistingUser({Key key}) : super(key: key);
 
   @override
   State<ExistingUser> createState() => _ExistingUserState();
@@ -11,7 +11,7 @@ class ExistingUser extends StatefulWidget {
 
 class _ExistingUserState extends State<ExistingUser> {
   static const userData = MethodChannel("user/existing");
-  String? userName;
+  String userName;
 @override
   void initState() {
     super.initState();
@@ -53,7 +53,7 @@ class _ExistingUserState extends State<ExistingUser> {
     );
   }
   Future<void> existingInfo() async{
-    String? value;
+    String value;
     try{
       value = await userData.invokeMethod("existing");
     } catch (e){

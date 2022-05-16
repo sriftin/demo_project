@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class PhoneNum extends StatefulWidget {
-  const PhoneNum({Key? key}) : super(key: key);
+  const PhoneNum({Key key}) : super(key: key);
 
   @override
   State<PhoneNum> createState() => _PhoneNumState();
