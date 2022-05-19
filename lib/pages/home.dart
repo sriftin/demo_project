@@ -26,8 +26,8 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SubaruAd(),
-              SizedBox(height: 20),
+              Expanded(
+                  child: SubaruAd()),
               Container(
                 child: ElevatedButton(
                   onPressed: () {
