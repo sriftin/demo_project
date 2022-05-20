@@ -47,7 +47,9 @@ class _UserScreenState extends State<UserScreen> {
   void missingDetails(){
     showDialog(context: context, builder: (context)=>
         AlertDialog(
-          title: Text("אחד מהנתונים חסר"),
+          title: Align(
+            alignment: Alignment.centerRight,
+              child: Text("אחד מהנתונים חסר")),
         ));
   }
   Widget build(BuildContext context) {
