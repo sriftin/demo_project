@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+
+
 class UserScreen extends StatefulWidget {
   String phone;
   UserScreen({Key key, this.phone}) : super(key: key);
@@ -16,13 +18,16 @@ class _UserScreenState extends State<UserScreen> {
   bool value = false;
   bool value1 = false;
   bool value2 = false;
+  bool wrongId = false;
   String userFullName;
+  String dayPicker;
   static const contact = MethodChannel("user/user");
   TextEditingController _firstName = TextEditingController();
   TextEditingController _lastName = TextEditingController();
   TextEditingController _eMail = TextEditingController();
   TextEditingController _id = TextEditingController();
-  TextEditingController _bd = TextEditingController();
+  DateTime _bd = null;
+  
 
   void newUser() async {
     showDialog(context: context, builder: (context) =>
@@ -163,30 +168,37 @@ class _UserScreenState extends State<UserScreen> {
                 style: TextStyle(fontSize: 18,letterSpacing: 0.8),
               ),
               SizedBox(height: 7,),
-              TextField(
-                controller: _bd,
-                textAlign: TextAlign.end,
-                keyboardType: TextInputType.datetime,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(top: 22,right: 15),
-                  hintText: "תאריך לידה",
-                  hintStyle: TextStyle(fontSize: 18),
-                  prefixIconConstraints: BoxConstraints(minHeight: 0, minWidth: 0),
-                  border: InputBorder.none,
-                  isDense: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(color :Colors.transparent),
+                  ElevatedButton(
+                      onPressed: () async{
+                        await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2023)
+                        ).then((date) {
+                          setState(() {
+                            _bd = date;
+                            dayPicker = _bd.toString();
+                          });
+                        });
+                      },
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(_bd == null ? 'תאריך לידה' : dayPicker.toString().substring(0,10),
+                        style: TextStyle(
+                          color: Colors.grey[700],
+                          fontSize: 18,
+                        ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(color: Colors.transparent),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(400, 45),
+                      primary: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)
+                      ),
+                    ),
                   ),
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-                style: TextStyle(fontSize: 18,letterSpacing: 0.8),
-              ),
               SizedBox(height: 7,),
               Row(
                 children: [
@@ -263,9 +275,9 @@ class _UserScreenState extends State<UserScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      if(value==false || value1==false || value2 == false || _id.text.isEmpty|| _eMail.text.isEmpty|| _firstName.text.isEmpty|| _lastName.text.isEmpty || _bd.text.isEmpty){
+                      if(value==false || value1==false || value2 == false || _id.text.isEmpty|| _eMail.text.isEmpty|| _firstName.text.isEmpty|| _lastName.text.isEmpty || _bd==null) {
                         missingDetails();
-                      } else {
+                      }else {
                         user();
                       }
                     });

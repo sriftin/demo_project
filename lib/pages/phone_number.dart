@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:demo_project/pages/loading.dart';
 import 'package:demo_project/pages/otp.dart';
 import 'package:demo_project/pages/user_screen.dart';
@@ -17,6 +19,7 @@ class _PhoneNumState extends State<PhoneNum> {
 
 
   TextEditingController controller = TextEditingController();
+  bool invalidNumber = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,11 +41,28 @@ class _PhoneNumState extends State<PhoneNum> {
               ),
             ),
             SizedBox(
-              height: 40,
+              height: 25,
+            ),
+            Visibility(
+              visible: invalidNumber,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 50, 0),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                      'המספר אינו תקין',
+                      style: TextStyle(
+                      color: Colors.red[400],
+                             fontSize: 20,
+                             fontWeight: FontWeight.w800),
+                      ),
+                ),
+              ),
             ),
             Container(
               margin: EdgeInsets.only(right: 40, left: 40),
               child: TextField(
+                maxLength: 9,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                     hintText: "501234567",
@@ -75,8 +95,15 @@ class _PhoneNumState extends State<PhoneNum> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context)=>OTPScreen(controller.text)));
+                  if (controller.text.length!=9) {
+                    setState(() {
+                      invalidNumber = true;
+                    });
+                  }else {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => OTPScreen(controller.text)));
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   fixedSize: Size(150, 45),
